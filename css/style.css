@@ -1,0 +1,400 @@
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  background-color: #dddddd;
+}
+
+.container {
+  max-width: 100%;
+}
+
+#main {
+  height: 92%;
+}
+
+.main_wrapper {
+  height: 100%;
+}
+
+header {
+  height: 8%;
+  background-color: #32cd32;
+  padding: 10px;
+  box-shadow: 5px 5px 5px #999;
+  margin-bottom: 5px;
+}
+
+header h2 {
+  font-size: 2em;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: #ffffff;
+  margin: 0;
+}
+
+header span {
+  font-size: 1.3em;
+  display: block;
+  color: #ffffff;
+  margin: auto;
+}
+
+.menuWrapper {
+  width: 80%;
+  height: 100%;
+  float: right;
+  display: table;
+  vertical-align: middle;
+}
+
+ul.menu {
+  margin: 10px 10px 4px 0;
+  padding: 0;
+}
+
+ul.menu li {
+  list-style: none;
+  display: -moz-inline-box;
+  display: inline-block;
+}
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+#nav {
+  background-color: #696969;
+  padding-top: 30px;
+  padding-right: 0px;
+}
+
+#nav ul {
+  padding: 0;
+}
+
+.nav_option {
+  color: #ffffff;
+  border-left: solid 6px #32cd32;
+  border-bottom: solid 2px #555555;
+  background: #aaaaaa;
+  margin-bottom: 5px;
+  line-height: 2;
+  padding: 0.5em;
+  list-style-type: none !important;
+  font-weight: bold;
+}
+
+.nav_selected {
+  background: #009900;
+}
+
+.content {
+  display: black;
+  height: 100%;
+  margin: auto;
+}
+
+.content_maintenance {
+  display: black;
+  height: 100%;
+  margin: 30px auto;
+}
+
+/* START Tab Designs *******************************************************/
+/* Step.1 */
+ul.tabs {
+  margin: 10px auto 0px;
+  padding: 0;
+  text-align: center;
+}
+
+ul.tabs li {
+  vertical-align: middle;
+  list-style: none;
+  display: -moz-inline-box;
+  display: inline-block;
+  word-wrap: break-word;
+  width: 80px;
+  height: 38px;
+  font-size: 0.8em;
+}
+
+ul.tabs li,
+div.panel {
+  border-style: solid;
+  border-width: 1px;
+  border-color: #696969;
+  background: #dddddd;
+}
+
+ul.tabs li {
+  border-bottom-width: 0;
+}
+
+ul.tabs li.tab-active {
+  background: #ffffff;
+}
+
+/* Step.2 */
+ul.tabs {
+  margin-bottom: -1px;
+}
+
+ul.tabs li {
+  margin-right: -1px;
+}
+
+/* Step.3 */
+ul.tabs li.tab-active {
+  position: relative;
+  z-index: 1;
+}
+
+div.panel {
+  margin: auto;
+  z-index: 0;
+  background-color: #ffffff;
+  height: 92%;
+}
+/* END Tab Designs *******************************************************/
+
+.actionbar {
+  border-bottom: medium solid #dddddd;
+  margin: 0 10px;
+  padding: 0 10px;
+}
+
+.actionbar > div {
+  display: inline-block;
+  margin: 10px;
+}
+
+.actionbar input {
+  width: 25px;
+  height: 25px;
+}
+
+#actionLimit {
+  padding-top: 10px;
+  float: right;
+}
+
+#actionLimit span {
+  margin-right: 7.5px;
+  vertical-align: bottom;
+}
+
+.mainTable {
+  margin-top: 10px;
+  padding: 0 10px;
+  height: 82%;
+  overflow-y: scroll;
+}
+
+table,
+th,
+td {
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+  line-height: 1;
+  margin: auto;
+}
+
+table.type_home th {
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  background: #3f3f3f;
+  color: #ffffff;
+}
+
+table.type_home td {
+  padding: 10px;
+  vertical-align: top;
+}
+
+th.col_check {
+  width: 30px;
+}
+
+th.col_id {
+  width: 400px;
+}
+
+th.col_action {
+  width: 180px;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.elm-invisible {
+  display: none;
+}
+
+.mt20 {
+  margin-top: 20px;
+}
+
+.focusTable {
+  background-color: #c2eeff;
+}
+
+.load_layout {
+  margin-top: 80px;
+}
+
+.done {
+  color: #008000;
+  width: 150px;
+}
+
+.col_modal_id {
+  width: 300px;
+}
+
+.col_status {
+  width: 70px;
+}
+
+.error_exe {
+  color: #ff0000;
+}
+
+.white-popup {
+  position: relative;
+  background: #fff;
+  width: 800px;
+  margin: 20px auto;
+}
+
+.white-popup-auto {
+  position: relative;
+  background: #fff;
+  width: 500px;
+  height: auto;
+  margin: 20px auto;
+}
+
+.popup_auto_wrapper {
+  padding: 10px;
+}
+
+.white-popup h2,
+.white-popup-auto h2 {
+  background-color: #32cd32;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: white;
+}
+
+.description_wrapper {
+  height: 55px;
+  margin-bottom: 10px;
+}
+
+.popup_wrapper {
+  height: 600px;
+  margin: 0;
+  padding: 20px;
+}
+
+.content_wrapper {
+  height: 420px;
+}
+
+.btn_wrapper {
+  text-align: right;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  margin-top: 20px;
+}
+
+.btn_wrapper input {
+  margin-right: 10px;
+  width: 100px;
+}
+
+.pcontent_max {
+  border-top: double #555555;
+  border-bottom: double #555555;
+  width: 100%;
+  height: 380px;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.pcontent_req {
+  border-top: double #555555;
+  border-bottom: double #555555;
+  height: 260px;
+  padding: 10px;
+  overflow-y: scroll;
+  margin: auto;
+}
+
+.pcontent_left {
+  float: left;
+  width: 55%;
+  height: 350px;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.pcontent_left table {
+  margin: 0;
+}
+
+.pcontent_right {
+  width: 45%;
+  height: 430px;
+  float: right;
+}
+
+.puserlist {
+  margin: 0 0 0 40px;
+}
+
+#nextbtn {
+  float: right;
+}
+
+#pagemgr {
+  margin: 10px 20px 2px;
+}
+
+#pagemgr button {
+  padding: 1px 10px;
+}
+
+table.type_home th {
+  padding: 10px;
+  font-weight: bold;
+  vertical-align: top;
+  background: #3f3f3f;
+  color: #ffffff;
+}
+
+th.col_word {
+  width: 230px;
+}
+
+#spam-img-wrapper {
+  margin: 15px auto;
+}
+
+.pagenum span {
+  display: inline-block;
+}

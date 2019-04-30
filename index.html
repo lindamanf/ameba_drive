@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta charset="utf-8">
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/magnific-popup.css">
+	<link rel="stylesheet" href="css/hint.min.css">
+	<script src="jquery/jquery-3.3.1.min.js"></script>
+	<script src="jquery/jquery.magnific-popup.min.js"></script>
+	<script src="js/param.js"></script>
+	<script src="js/utils.js"></script>
+	<script src="js/action.js"></script>
+	<script src="js/popupUtils.js"></script>
+	<script src="js/myList.js"></script>
+	<script src="js/myReader.js"></script>
+	<script src="js/daily.js"></script>
+	<script src="js/search/search.js"></script>
+	<script src="js/search/rename.js"></script>
+	<script src="js/search/delete.js"></script>
+	<script src="js/search/refresh.js"></script>
+	<script src="js/action/request.js"></script>
+	<script src="js/action/peta.js"></script>
+	<script src="js/action/good.js"></script>
+	<script src="js/maintenance/rdRefresh.js"></script>
+	<script src="js/maintenance/maintenance.js"></script>
+	<script src="js/layout.js"></script>
+	<script src="js/response.js"></script>
+	<script src="js/init.js"></script>
+	<title>Ameba Drive</title>
+</head>
+
+<body>
+	<header class="container">
+		<div class="row">
+			<h2 class="align-center col-sm-3">Ameba Drive</h2>
+			<div class="col-sm-3 offset-sm-6">
+				<span class="align-right" id="loginUser">ログインなし</span>
+			</div>
+		</div>
+	</header>
+	<div class="container" id='main'>
+		<div class="row main_wrapper">
+			<div id="nav" class="col-sm-2">
+				<ul>
+					<a href="#">
+						<li id="searchNav" class="nav_option nav_selected">ID検索</li>
+					</a>
+					<a href="#">
+						<li id="actionNav" class="nav_option">アクション
+						</li>
+					</a>
+					<a href="#">
+						<li id="maintenanceNav" class="nav_option">フォロワー管理</li>
+					</a>
+				</ul>
+			</div>
+			<div class="content col-sm-10" id="userListMgr">
+				<ul class="tabs" id="tabList"></ul>
+				<div class="panel">
+					<div class="actionbar">
+						<div id="searchIcon" class='icon searchIconG'>
+							<a id="searchLink" class="status-icon  hint--bottom-left  hint--success" data-hint="ID検索">
+								<input type="image" src="image/action_icon/plus.png" alt="読者検索" class="imgicon">
+							</a>
+						</div>
+						<div class='icon searchIconG'>
+							<a id="renameLink" class="status-icon  hint--bottom-left  hint--success" data-hint="タブ名変更">
+								<input type="image" src="image/action_icon/edit.png" alt="リスト名変更" class="imgicon">
+							</a>
+						</div>
+						<div class='icon searchIconG'>
+							<a id="deleteLink" class="status-icon  hint--bottom-left  hint--success" data-hint="ユーザー削除">
+								<input type="image" src="image/action_icon/delete.png" alt="ユーザ削除変更" class="imgicon">
+							</a>
+						</div>
+						<div class='icon searchIconG'>
+							<a id="refreshLink" class="status-icon  hint--bottom-left  hint--success" data-hint="ユーザー情報更新">
+								<input type="image" src="image/action_icon/refresh.png" alt="ユーザリフレッシュ">
+							</a>
+						</div>
+						<div id="requestIcon" class='icon actionIcon' style="display: none">
+							<a id="requestLink" class="status-icon  hint--bottom-left  hint--success" data-hint="フォロー">
+								<input type="image" src="image/action_icon/reader.png" alt="フォロー申請">
+							</a>
+						</div>
+						<div id="petaIcon" class='icon actionIcon' style="display: none">
+							<a id="petaLink" class="status-icon  hint--bottom-left  hint--success" data-hint="ペタ">
+								<input type="image" src="image/action_icon/peta.png" alt="ペタをつける">
+							</a>
+						</div>
+						<div id="iineIcon" class='icon actionIcon' style="display: none">
+							<a id="iineLink" class="status-icon  hint--bottom-left  hint--success" data-hint="いいね">
+								<input type="image" src="image/action_icon/good.png" alt="いいねを押す">
+							</a>
+						</div>
+						<div id="actionLimit" style="display: none">
+							<span id='readerLimit'></span>
+							<span id='petaLimit'></span>
+							<span id='goodLimit'></span>
+						</div>
+					</div>
+					<div id='pagemgr' class="row">
+						<div class="col-sm-1 offset-sm-4">
+							<button id="prevbtn" style="display: none" type="button" class="btn btn-success">前へ</button>
+						</div>
+						<div class="col-sm-2 pagenum align-center">
+							<span class='currentpage'></span>
+							<span class=maxpage></span>
+							</span>
+						</div>
+						<div class="col-sm-1">
+							<button id="nextbtn" style="display: none" type="button" class="btn btn-success">次へ</button>
+						</div>
+					</div>
+					<div class="mainTable">
+						<table class="type_home" id="listContents">
+							<thead>
+								<tr>
+									<th class="col_check">
+										<input id="checkBoxAll" name="allCheck" type="checkbox">
+									</th>
+									<th class="col_id">ユーザーID</th>
+									<th class="col_action">本日のペタ</th>
+									<th class="col_action">本日のいいね</th>
+									<th class="col_action">フォロー</th>
+								</tr>
+							</thead>
+							<tbody id="userList"></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="content_maintenance col-sm-9" id="readerMgr" style="display: none">
+				<div class="panel">
+					<div class="actionbar">
+						<div style="float: left; margin: 10px;" class='searchIconG'>
+							<a id="rdRefreshLink" class="status-icon  hint--bottom-left  hint--success" data-hint="読者の差分抽出">
+								<input type="image" src="image/action_icon/rdRefresh.png" alt="読者情報更新" class="imgicon">
+							</a>
+						</div>
+						<div style="float: left; margin: 10px;" class='searchIconG'>
+							<a id="maintenanceLink" class="status-icon  hint--bottom-left  hint--success" data-hint="読者の差分削除">
+								<input type="image" src="image/action_icon/maintenance.png" alt="読者の差分削除" class="imgicon">
+							</a>
+						</div>
+						<br clear="both" />
+					</div>
+					<div class="mainTable">
+						<p>
+							<span class='openReader'></span>&nbsp;/
+							<span class='waitReader'></span>
+						</p>
+						<table class="type_home" id="rdListContents">
+							<thead>
+								<tr>
+									<th class="col_check">
+										<input id="rdCheckBoxAll" name="allCheck" type="checkbox">
+									</th>
+									<th class="col_id">相互フォローではないユーザー
+									</th>
+									<th style="width: 200px">状態</th>
+								</tr>
+							</thead>
+							<tbody id="readerList"></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="searchPopup" class="mfp-hide white-popup-auto">
+		<h2 class="shadow p-3">読者のID検索</h2>
+		<div class="popup_auto_wrapper">
+			<p>入力したアメーバブロガーの読者のユーザーID一覧を取得する</p>
+			<div class="input-group mb-3">
+				<input type="text" id="searchId" class="form-control" placeholder="対象ブロガーのユーザーID" aria-label="Ameba ID" aria-describedby="button-addon2">
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary" type="button" id="search_submit">検索</button>
+				</div>
+			</div>
+			<div>
+				<span id="searchStatus"></span>
+				<span class='load' style="display: none;">
+					<img src="gifs/load.gif" style="width: 100px;">
+				</span>
+			</div>
+			<div class="progress">
+				<div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0"
+				 aria-valuemin="0" aria-valuemax="100"></div>
+			</div>
+		</div>
+		<div class="btn_wrapper">
+			<input type="button" id="search_cancel" value="CANCEL" class="btn btn-primary">
+		</div>
+	</div>
+	<div id="renamePopup" class="mfp-hide white-popup-auto">
+		<h2 class="shadow p-3">タブ名変更</h2>
+		<div class="popup_auto_wrapper">
+			<p>新しいタブ名を入力して下さい</p>
+			<div class="input-group mb-3">
+				<input type="text" id="inputRename" class="form-control" placeholder="新しいタブ名" aria-label="新しいタブ名" aria-describedby="button-addon2">
+				<div class="input-group-append">
+					<button class="btn btn-outline-secondary" type="button" id="rename_submit">変更</button>
+				</div>
+			</div>
+			<span id="searchStatus"></span>
+		</div>
+		<div class="btn_wrapper">
+			<input type="button" id="search_cancel" value="CANCEL" class="btn btn-primary">
+		</div>
+	</div>
+	<div id="deletePopup" class="mfp-hide white-popup-auto">
+		<h2 class="shadow p-3">ユーザー削除</h2>
+		<div class="popup_auto_wrapper">
+			<p>選択されたユーザーを削除する</p>
+			<div>
+				<input type="button" id="delete_submit" value="DELETE" class="btn btn-primary">
+				<input type="button" id="delete_cancel" value="CANCEL" class="btn btn-primary">
+			</div>
+		</div>
+	</div>
+	<div id="refreshPopup" class="mfp-hide white-popup-auto">
+		<h2 class="shadow p-3">重複ユーザーの削除</h2>
+		<div class="popup_auto_wrapper">
+			<p>リスト内で重複したユーザーを削除する
+				<span class='load' style="display: none;">
+					<img src="gifs/load.gif" style="width: 50px;">
+				</span>
+				<br>※リスト数が多い場合時間がかかることがあります
+			</p>
+			<div>
+				<input type="button" id="refresh_submit" value="START" class="btn btn-primary">
+				<input type="button" id="refresh_cancel" value="CANCEL" class="btn btn-primary">
+			</div>
+		</div>
+	</div>
+	<div id="requestPopup" class="mfp-hide white-popup">
+		<h2 class="shadow p-3">フォロー</h2>
+		<div class="popup_wrapper">
+			<div class="description_wrapper">
+				<p>自動フォローを開始する</p>
+				<div class="progress">
+					<div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0"
+					 aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div>
+			<div class="content_wrapper">
+				<div class="form-group">
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" id="reqSpamCheck" name="reqSpamCheck" value="reqSpamCheck"> スパム画像チェックがあるユーザーはスキップする
+						</label>
+					</div>
+				</div>
+				<div id="spam-img-wrapper" style="display: none">
+					<div class="row">
+						<div class="input-group col-sm-6 offset-sm-1">
+							<label for="spam-img-input">右側枠内にスパム対策用画像が表示されたら、数字を入力してください</label>
+							<input type="text" id="spam-img-input" class="form-control" 　aria-label="Ameba ID" aria-describedby="button-addon2">
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="button" id="spam-img-input-btn">送信</button>
+							</div>
+						</div>
+						<div class="col-sm-4" style="border:solid 2px grey">
+							<img id="spam-img">
+						</div>
+					</div>
+				</div>
+				<div class="pcontent_max">
+					<table class="type_home" id='targetReaderTable'>
+						<thead>
+							<tr>
+								<th class="col_modal_id">ID</th>
+								<th class="done">状態</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+			<div class="btn_wrapper">
+				<input type="button" id="request_submit" value="START" class="btn btn-primary">
+				<input type="button" id="request_cancel" value="CANCEL" class="btn btn-primary">
+			</div>
+		</div>
+	</div>
+	<div id="petaPopup" class="mfp-hide white-popup">
+		<h2 class="shadow p-3">ペタ</h2>
+		<div class="popup_wrapper">
+			<div class="description_wrapper">
+				<p>自動ペタを開始する</p>
+				<div class="progress">
+					<div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0"
+					 aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+
+			</div>
+			<div class="content_wrapper">
+				<div class="pcontent_max">
+					<table class="type_home" id='targetPetaTable'>
+						<thead>
+							<tr>
+								<th class="col_modal_id">ID</th>
+								<th class="done">状態</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+			<div class="btn_wrapper">
+				<input type="button" id="peta_submit" value="START" class="btn btn-primary">
+				<input type="button" id="peta_cancel" value="CANCEL" class="btn btn-primary">
+			</div>
+		</div>
+	</div>
+	<div id="iinePopup" class="mfp-hide white-popup">
+		<h2 class="shadow p-3">いいね</h2>
+		<div class="popup_wrapper">
+			<div class="description_wrapper">
+				<p>自動いいねを開始する</p>
+				<div class="progress">
+					<div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" style="width: 0%" aria-valuenow="0"
+					 aria-valuemin="0" aria-valuemax="100"></div>
+				</div>
+			</div>
+			<div class="content_wrapper">
+				<div class="pcontent_max">
+					<table class="type_home" id='targetGoodTable'>
+						<thead>
+							<tr>
+								<th class="col_modal_id">ID</th>
+								<th class="done">状態</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+			<div class="btn_wrapper">
+				<input type="button" id="iine_submit" value="START" class="btn btn-primary">
+				<input type="button" id="iine_cancel" value="CANCEL" class="btn btn-primary">
+			</div>
+		</div>
+	</div>
+	<div id="rdRefreshPopup" class="mfp-hide white-popup-auto">
+		<h2 class="shadow p-3">フォロワーの差分抽出</h2>
+		<div class="popup_auto_wrapper">
+			<p>
+				相互フォローでないユーザーを抽出する
+				<br>
+				<a href="https://blog.ameba.jp/ucs/blgfavorite/favoritelist.do" target="_blank">フォロー管理ページリンク</a>
+				<br>
+				<span class='load' style="display: none;">
+					<img src="gifs/load.gif" style="width: 100px;">
+				</span>
+			</p>
+			<div class="btn_wrapper">
+				<input type="button" id="rdRefresh_submit" value="START" class="btn btn-primary pbtn">
+				<input type="button" id="rdRefresh_cancel" value="CANCEL" class="btn btn-primary pbtn">
+			</div>
+		</div>
+	</div>
+	<div id="maintenancePopup" class="mfp-hide white-popup">
+		<h2 class="shadow p-3">相互フォローではないユーザーの削除</h2>
+		<div class="popup_wrapper">
+			<div class="content_wrapper">
+				<p>
+					相互フォローではないユーザーのフォローを解除
+				</p>
+				<div class="pcontent_left">
+					<span>・対象ユーザ一覧</span>
+					<table class="type_home" id='targetWaitUserTable'>
+						<thead>
+							<tr>
+								<th class="col_modal_id">ID</th>
+								<th class="done">状態</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="pcontent_right">
+					<div class='load' style="display: none">
+						<img src="gifs/load.gif">
+					</div>
+				</div>
+			</div>
+			<div class="btn_wrapper">
+				<input type="button" id="maintenance_submit" value="START" class="btn btn-primary pbtn">
+				<input type="button" id="maintenance_cancel" value="CANCEL" class="btn btn-primary pbtn">
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
