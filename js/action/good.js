@@ -82,7 +82,7 @@ Good.resultSearchNewArticle = function (articleUrl) {
 
 	chrome.tabs.create({
 		url: articleUrl,
-		selected: false
+		selected: true
 	}, function (tab) {
 		currentTab = tab;
 		executeOnTab(tab, Good.clickAddIineBtn, tab);

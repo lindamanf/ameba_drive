@@ -66,21 +66,34 @@ function clickAddIineBtn() {
 		dt: ''
 	}
 
-	// いいねセレクタ取得
-	var good = document.querySelector('a._SRPdpszF');
+	var goodbar
 
-	// いいねボタンが存在しない場合、いいね処理をスキップ
-	if (good == null) {
-		message.fn = '5';
-	}
-	// いいねリンクにいいね済みクラスがある場合、いいね処理をスキップ
-	else if (good.classList.contains('_qnBfV007')) {
-		message.fn = '7';
+	if (document.querySelector(".skin-entryFooter") != null) {
+		goodbar = ".skin-entryFooter"
+	} else if (document.querySelector(".skinArticleFooter") != null) {
+		goodbar = ".skinArticleFooter"
+	} else if (document.querySelector(".foot") != null) {
+		goodbar = ".foot"
 	} else {
-		// 未いいねの場合、いいねリンクをクリックする
-		good.click();
+		message.fn = '5';
+		return
 	}
-	chrome.extension.sendMessage(message);
+	
+	document.querySelector(goodbar).scrollIntoView(true)
+
+	setTimeout(() => {
+		var good = document.querySelector('a._SRPdpszF');
+		console.log("good: " + good)
+	
+		if (good == null) {
+			message.fn = '5';
+		} else if (good.classList.contains('_qnBfV007')) {
+			message.fn = '7';
+		} else {
+			good.click();
+		}
+		chrome.extension.sendMessage(message);
+	}, 3000)
 }
 
 /*------------------

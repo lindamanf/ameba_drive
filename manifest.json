@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Ameba Drive(受講生用)",
-  "version": "4.0.4",
+  "version": "4.1.0",
   "permissions": ["https://*/", "http://*/", "tabs", "activeTab", "storage"],
   "browser_action": {
     "default_icon": "image/icon.png",
